@@ -17,7 +17,7 @@ function AddTodoForm(props) {
     setTodoTitle("");
   };
   return (
-    <div>
+    <>
       <form onSubmit={handleAddTodo}>
         <label htmlFor="todoTitle">Title: </label>
         <input
@@ -28,7 +28,7 @@ function AddTodoForm(props) {
         />
         <button type="submit">Add</button>
       </form>
-    </div>
+    </>
   );
 }
 
