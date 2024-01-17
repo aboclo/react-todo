@@ -1,0 +1,147 @@
+/*Background & Background color*/
+.appContainer {
+  background-color: rgb(245, 238, 230);
+  min-height: 100vh;
+}
+/*------------------------------------------------------*/
+
+/*Title*/
+.titleChange {
+  font-size: 70px;
+  color: rgb(0, 0, 0);
+  font-family: "Nanum Pen Script", cursive;
+  margin: 5px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*------------------------------------------------------*/
+
+/*Input*/
+.inputContainer {
+  text-align: center;
+}
+.inputTitle {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: "Playfair Display", serif;
+}
+/*------------------------------------------------------*/
+
+/*Task List & Container*/
+.taskList {
+  list-style: none;
+  padding: 0;
+}
+
+.taskListContainer {
+  background-color: #f3d7ca;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 30%;
+  padding: 20px;
+  border: 4px solid rgb(230, 164, 180);
+  border-radius: 20px;
+}
+
+.listItem {
+  font-family: "Nanum Pen Script", cursive;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 30px;
+  text-align: center;
+  margin: 10px 0;
+  border: 1.5px solid rgb(230, 164, 180);
+  padding: 10px;
+  border-radius: 20px;
+}
+/*------------------------------------------------------*/
+
+/* Checkbox */
+.checked {
+  text-decoration: line-through;
+}
+
+.checkboxAndList {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  margin-right: 25px;
+}
+/*------------------------------------------------------*/
+
+/*Buttons*/
+.addButton {
+  font-family: "Playfair Display", serif;
+  font-weight: bolder;
+  background-color: rgba(230, 164, 180, 0.8);
+  color: rgb(0, 0, 0);
+  width: 70px;
+  border: 2px solid rgba(221, 72, 110, 0.6);
+  border-radius: 12px;
+  padding: 8px;
+  margin: 10px;
+  text-align: center;
+  font-size: 15px;
+  transition-duration: 0.3s;
+}
+.removeButton {
+  font-family: "Playfair Display", serif;
+  text-align: center;
+  font-weight: bolder;
+  background-color: rgba(230, 164, 180, 0.4);
+  color: rgb(0, 0, 0);
+  width: 45px;
+  border: 2px solid rgb(230, 164, 180);
+  border-radius: 12px;
+  padding: 8px 8px;
+  margin-left: auto;
+  font-size: 13px;
+  transition-duration: 0.3s;
+}
+.removeButton:hover,
+.addButton:hover {
+  background-color: rgb(230, 164, 180);
+  border-color: rgb(230, 164, 180);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+/*------------------------------------------------------*/
+
+/*Icon*/
+.svgIcon {
+  display: inline-block;
+  margin: 10px;
+  padding: 5px 5px;
+  color: rgb(221, 72, 110);
+  vertical-align: middle;
+}
+/*------------------------------------------------------*/
+
+/*Header & Header Text*/
+.header {
+  color: white;
+}
+
+.headerText {
+  color: black;
+  display: inline-block;
+  font-weight: bolder;
+  font-size: 18px;
+  font-family: "Playfair Display", serif;
+  vertical-align: middle;
+}
+
+/*------------------------------------------------------*/
+
+/*Media Queries*/
+
+@media (max-width: 1250px) /*/????*/ {
+}
