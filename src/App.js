@@ -2,6 +2,8 @@ import TodoList from "./TodoList";
 import React, { useEffect, useState } from "react";
 import AddTodoForm from "./AddTodoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import style from "./TodoListItem.module.css";
+import ListAltIcon from "@mui/icons-material/ListAlt";
 
 function App() {
   const removeTodo = (id) => {
@@ -64,25 +66,33 @@ function App() {
   }, [todoList, isLoading]);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <h1>Todo List</h1>
-              <AddTodoForm onAddTodo={addTodo} />
-              {isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-              )}
-            </>
-          }
-        />
-        <Route path="/new" element={<h1>New TodoList</h1>} />
-      </Routes>
-    </BrowserRouter>
+    <div className={style.appContainer}>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <header className={style.header}>
+                  <ListAltIcon className={style.svgIcon} />
+                  <span className={style.headerText}>Todo List App</span>
+                </header>
+                <h1 className={style.titleChange}>Todo List</h1>
+                <div className={style.taskListContainer}>
+                  <AddTodoForm onAddTodo={addTodo} />
+                  {isLoading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                  )}
+                </div>
+              </>
+            }
+          />
+          <Route path="/new" element={<h1>New TodoList</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 export default App;
