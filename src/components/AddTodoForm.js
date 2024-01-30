@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputWithLabel from "./InputWithLabel";
 import style from "./TodoListItem.module.css";
+import PropTypes from "prop-types";
 
 function AddTodoForm(props) {
   const { onAddTodo } = props;
@@ -13,8 +14,8 @@ function AddTodoForm(props) {
 
   const handleAddTodo = (event) => {
     event.preventDefault();
-    const objectForm = { title: todoTitle, id: Date.now() };
-    onAddTodo(objectForm);
+    const newTodo = { title: todoTitle, id: Date.now() };
+    onAddTodo(newTodo);
     setTodoTitle("");
   };
   return (
@@ -37,5 +38,9 @@ function AddTodoForm(props) {
     </>
   );
 }
+
+AddTodoForm.propTypes = {
+  onAddTodo: PropTypes.func,
+};
 
 export default AddTodoForm;
