@@ -1,18 +1,106 @@
-import TodoList from "./TodoList";
+import TodoList from "./components/TodoList";
 import React, { useEffect, useState } from "react";
-import AddTodoForm from "./AddTodoForm";
+import AddTodoForm from "./components/AddTodoForm";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import style from "./TodoListItem.module.css";
+import style from "./components/TodoListItem.module.css";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 
 function App() {
-  const removeTodo = (id) => {
-    const newList = todoList.filter((item) => id !== item.id);
-    setTodoList(newList);
+  //REMOVE TODO//
+  const removeTodo = async (id) => {
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${id}`;
+
+    const options = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+    };
+
+    try {
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        const message = `Error wee woo: ${response.status}`;
+        throw new Error(message);
+      }
+
+      const newList = todoList.filter((item) => id !== item.id);
+      setTodoList(newList);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
-  const addTodo = (newTodo) => {
-    setTodoList([...todoList, newTodo]);
+  //ADD TODO//
+  const addTodo = async (newTodo) => {
+    try {
+      const airtableData = {
+        fields: {
+          title: newTodo.title,
+        },
+      };
+
+      const response = await fetch(
+        `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+          },
+          body: JSON.stringify(airtableData),
+        }
+      );
+
+      if (!response.ok) {
+        const message = `Error: ${response.status}`;
+        throw new Error(message);
+      }
+
+      const dataResponse = await response.json();
+      setTodoList([...todoList, newTodo]);
+      return dataResponse;
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
+  };
+
+  //EDIT TODO//
+  const newEditedTitle = async (id, newTitle) => {
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}/${id}`;
+
+    const airtableData = {
+      fields: {
+        title: newTitle,
+      },
+    };
+
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+      body: JSON.stringify(airtableData),
+    };
+
+    try {
+      const response = await fetch(url, options);
+
+      if (!response.ok) {
+        const message = `Error wee woo: ${response.status}`;
+        throw new Error(message);
+      }
+
+      const updatedList = todoList.map((item) =>
+        item.id === id ? { ...item, title: newTitle } : item
+      );
+      setTodoList(updatedList);
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const [todoList, setTodoList] = useState(
@@ -21,6 +109,7 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  //FETCH DATA//
   const fetchData = async () => {
     const options = {
       method: "GET",
@@ -81,9 +170,13 @@ function App() {
                 <div className={style.taskListContainer}>
                   <AddTodoForm onAddTodo={addTodo} />
                   {isLoading ? (
-                    <p>Loading...</p>
+                    <p className={style.loading}>Loading...</p>
                   ) : (
-                    <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+                    <TodoList
+                      todoList={todoList}
+                      onRemoveTodo={removeTodo}
+                      onNewEditedTitle={newEditedTitle}
+                    />
                   )}
                 </div>
               </>
@@ -95,4 +188,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
