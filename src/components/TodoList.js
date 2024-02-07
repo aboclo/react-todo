@@ -1,6 +1,6 @@
 import React from "react";
 import TodoListItem from "./TodoListItem";
-import style from "./TodoListItem.module.css";
+import style from "./TodoList.module.css";
 import PropTypes from "prop-types";
 
 function TodoList(props) {
