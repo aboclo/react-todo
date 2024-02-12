@@ -1,0 +1,108 @@
+/* Background color */
+.backgroundStyle {
+  background-color: rgb(245, 238, 230);
+  min-height: 100vh;
+}
+/*------------------------------------------------------*/
+
+/* Welcome... Title */
+.welcomeTitle {
+  font-size: 1.5rem;
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+  font-family: "Playfair Display", serif;
+  margin: 2rem;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*------------------------------------------------------*/
+
+/* Main title */
+.mainTitle {
+  font-size: 5rem;
+  color: rgb(0, 0, 0);
+  font-family: "Nanum Pen Script", cursive;
+  margin: 2rem auto;
+  padding: 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*------------------------------------------------------*/
+
+/* body text */
+.body {
+  font-size: 1.2rem;
+  color: rgb(0, 0, 0);
+  font-family: "Playfair Display", serif;
+  margin: 2rem;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*------------------------------------------------------*/
+
+/* Todo List App button */
+.TodoButton {
+  font-family: "Nanum Pen Script", cursive;
+  font-weight: bolder;
+  margin: 0 auto;
+  font-size: 1.8rem;
+  width: 80%;
+  max-width: 300%;
+  border-radius: 12px;
+  display: block;
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  border: 3px solid rgba(213, 59, 98, 0.6);
+  text-align: center;
+  transition-duration: 0.3s;
+}
+
+.TodoButton:hover {
+  background-color: rgba(230, 164, 180, 0.4);
+  border-color: rgb(230, 164, 180);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/*Media Queries*/
+
+/* Tablet */
+@media only screen and (min-width: 600px) {
+  .welcomeTitle {
+    font-size: 1.4rem;
+  }
+  .mainTitle {
+    font-size: 6rem;
+  }
+  .TodoButton {
+    width: 50%;
+  }
+}
+
+/* Laptops */
+@media only screen and (min-width: 1024px) {
+  .welcomeTitle {
+    font-size: 1.3rem;
+  }
+  .TodoButton {
+    width: 30%;
+  }
+}
+
+/* Desktops */
+@media only screen and (min-width: 1200px) {
+  .welcomeTitle {
+    font-size: 1.5rem;
+  }
+  .TodoButton {
+    width: 20%;
+  }
+}

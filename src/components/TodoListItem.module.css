@@ -1,57 +1,4 @@
-/*Background & Background color*/
-.appContainer {
-  background-color: rgb(245, 238, 230);
-  min-height: 100vh;
-}
-/*------------------------------------------------------*/
-
-/*Title*/
-.titleChange {
-  font-size: 4rem;
-  color: rgb(0, 0, 0);
-  font-family: "Nanum Pen Script", cursive;
-  margin: 2rem;
-  padding: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-/*------------------------------------------------------*/
-/*Loading*/
-.loading {
-  font-family: "Playfair Display", serif;
-  font-weight: bold;
-}
-
-/*------------------------------------------------------*/
-
-/*Input*/
-.inputContainer {
-  text-align: center;
-}
-.inputTitle {
-  font-size: 1.3rem;
-  font-weight: bold;
-  font-family: "Playfair Display", serif;
-}
-/*------------------------------------------------------*/
-
-/*Task List & Container*/
-.taskList {
-  list-style: none;
-  padding: 0;
-}
-
-.taskListContainer {
-  background-color: rgb(243, 215, 202);
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 80%;
-  padding: 1rem;
-  border: 4px solid rgb(230, 164, 180);
-  border-radius: 20px;
-}
+/*Task List */
 
 .listItem {
   font-family: "Nanum Pen Script", cursive;
@@ -67,6 +14,7 @@
   padding: 1rem;
   border-radius: 20px;
 }
+
 /*------------------------------------------------------*/
 
 /* Checkbox */
@@ -85,7 +33,6 @@
 /*------------------------------------------------------*/
 
 /*Buttons*/
-.addButton,
 .removeButton,
 .editButton,
 .saveButton {
@@ -102,11 +49,6 @@
   transition-duration: 0.3s;
 }
 
-.addButton {
-  font-family: "Playfair Display", serif;
-  width: 65px;
-}
-
 .removeButton,
 .editButton {
   font-size: 0.5rem;
@@ -120,7 +62,6 @@
   font-size: 0.5rem;
 }
 
-.addButton:hover,
 .removeButton:hover,
 .editButton:hover,
 .saveButton:hover {
@@ -132,39 +73,10 @@
 }
 /*------------------------------------------------------*/
 
-/*Icon*/
-.svgIcon {
-  display: inline-block;
-  margin: 10px;
-  padding: 5px 5px;
-  color: rgb(221, 72, 110);
-  vertical-align: middle;
-}
-/*------------------------------------------------------*/
-
-/*Header & Header Text*/
-.header {
-  color: white;
-}
-
-.headerText {
-  color: black;
-  display: inline-block;
-  font-weight: bolder;
-  font-size: 1rem;
-  font-family: "Playfair Display", serif;
-  vertical-align: middle;
-}
-
-/*------------------------------------------------------*/
-
 /*Media Queries*/
 
 /* Tablet */
 @media only screen and (min-width: 600px) {
-  .taskListContainer {
-    width: 75%;
-  }
   .listItem {
     font-size: 2rem;
   }
@@ -172,9 +84,6 @@
 
 /* Laptops */
 @media only screen and (min-width: 1024px) {
-  .taskListContainer {
-    width: 35%;
-  }
   .listItem {
     font-size: 1.7rem;
   }
@@ -182,9 +91,6 @@
 
 /* Desktops */
 @media only screen and (min-width: 1200px) {
-  .taskListContainer {
-    width: 40%;
-  }
   .listItem {
     font-size: 1.7rem;
   }
