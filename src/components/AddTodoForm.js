@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import InputWithLabel from "./InputWithLabel";
 import style from "./AddTodoForm.module.css";
 import PropTypes from "prop-types";
+import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 
 function AddTodoForm(props) {
-  const { onAddTodo } = props;
+  const { onAddTodo, onToggleOrder } = props;
   const [todoTitle, setTodoTitle] = useState("");
 
   const handleTitleChange = (event) => {
@@ -34,6 +35,15 @@ function AddTodoForm(props) {
           <button type="submit" className={style.addButton}>
             ADD
           </button>
+          <div>
+            <button
+              type="button"
+              onClick={onToggleOrder}
+              className={style.toggleButton}
+            >
+              <SortByAlphaIcon />
+            </button>
+          </div>
         </div>
       </form>
     </>
@@ -42,6 +52,7 @@ function AddTodoForm(props) {
 
 AddTodoForm.propTypes = {
   onAddTodo: PropTypes.func,
+  onToggleOrder: PropTypes.func,
 };
 
 export default AddTodoForm;
