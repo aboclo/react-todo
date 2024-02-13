@@ -9,6 +9,12 @@ import HomeIcon from "@mui/icons-material/Home";
 const TodoContainer = ({ tableName }) => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState("asc");
+
+  const toggleOrder = () => {
+    const newOrder = sortOrder === "asc" ? "desc" : "asc";
+    setSortOrder(newOrder);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +24,7 @@ const TodoContainer = ({ tableName }) => {
           Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
         },
       };
-      const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}?view=Grid%20view&sort[0][field]=title&sort[0][direction]=asc`;
+      const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}?view=Grid%20view&sort[0][field]=title&sort[0][direction]=${sortOrder}`;
 
       try {
         const response = await fetch(url, options);
@@ -33,9 +39,11 @@ const TodoContainer = ({ tableName }) => {
         const sortedTodoList = [...data.records].sort((objectA, objectB) => {
           const A = objectA.fields.title.toLowerCase();
           const B = objectB.fields.title.toLowerCase();
-          if (A < B) return 1;
-          if (A > B) return -1;
-          return 0;
+          if (sortOrder === "asc") {
+            return A.localeCompare(B);
+          } else {
+            return B.localeCompare(A);
+          }
         });
 
         setTodoList(
@@ -51,7 +59,7 @@ const TodoContainer = ({ tableName }) => {
     };
 
     fetchData();
-  }, [tableName]);
+  }, [tableName, sortOrder]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -86,7 +94,19 @@ const TodoContainer = ({ tableName }) => {
 
       const dataResponse = await response.json();
 
-      setTodoList([...todoList, { id: dataResponse.id, title: newTodo.title }]);
+      const sortedList =
+        sortOrder === "asc"
+          ? [...todoList, { id: dataResponse.id, title: newTodo.title }].sort(
+              (a, b) => a.title.localeCompare(b.title)
+            )
+          : [{ id: dataResponse.id, title: newTodo.title }, ...todoList].sort(
+              (a, b) => b.title.localeCompare(a.title)
+            );
+
+      setTodoList(sortedList);
+
+      /*setTodoList([...todoList, { id: dataResponse.id, title: newTodo.title }]);*/
+
       return dataResponse;
     } catch (error) {
       console.log(error.message);
@@ -166,7 +186,7 @@ const TodoContainer = ({ tableName }) => {
         </header>
         <h1 className={style.titleChange}>Todo List</h1>
         <div className={style.taskListContainer}>
-          <AddTodoForm onAddTodo={addTodo} />
+          <AddTodoForm onAddTodo={addTodo} onToggleOrder={toggleOrder} />
           {isLoading ? (
             <p className={style.loading}>Loading...</p>
           ) : (
